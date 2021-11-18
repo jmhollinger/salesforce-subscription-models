@@ -3,4 +3,4 @@ SELECT
     product_id,
     created_at
 FROM
-    {{ source('public', 'subscriptions') }}
+    {{ source('subscription_data', 'subscriptions') }}

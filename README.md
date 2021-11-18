@@ -1,15 +1,7 @@
-Welcome to your new dbt project!
+# salesforce-subscription-models
 
-### Using the starter project
+This repo has examples of using dbt to define sources and model a base table for salesforce leads in `models/salesforce`. It also includes an example of how to model data and references those models using ref() in `models/subscription_data`.
 
-Try running the following commands:
-- dbt run
-- dbt test
+# Salesforce Models
 
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+# Subscription Models

@@ -1,7 +1,9 @@
 version: 2
 
 sources:
-  - name: public
+  - name: subscription_data
+    database: jonathanhollinger
+    schema: public
     description : This is replicated app data from Postgres related to subscriptions.
     
     tables:

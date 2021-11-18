@@ -4,4 +4,4 @@ SELECT
     new_product_id,
     happened_at
 FROM
-    {{ source('public', 'subscription_change_log') }}
+    {{ source('subscription_data', 'subscription_change_log') }}

@@ -3,19 +3,54 @@ version: 2
 
 models:
   - name: subscriptions
-    description: "A starter dbt model"
+    description: Each record is a subscription to a specific product. Products for a specific subscription may change over time. 
     columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: subscription_id
+        description: The primary key and id of the subscription
         tests:
           - unique
           - not_null
-
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: product_id
+        description: The product id associated with the subscritption. This field is mutable.
         tests:
-          - unique
+          - not_null
+      - name: created_at
+        description: The date the record was created.
+        tests:
+          - not_null
+
+  - name: subscription_change_log
+    description: Each record is a change that occured to the product id associated with a subscription.
+    columns:
+      - name: subscription_id
+        description: The id of the subscription that was changed. 
+        tests:
+          - not_null
+      - name: old_product_id
+        description: The old product id associated with the subscription.
+        tests:
+          - not_null
+      - name: new_product_id
+        description: The new product id associated with the subscription.
+        tests:
+          - not_null
+      - name: happened_at
+        description: The date the record was created.
+        tests:
+          - not_null
+
+  - name: subscription_history
+    description: Each record is a change that occured to the product id associated with a subscription.
+    columns:
+      - name: subscription_id
+        description: The id of the subscription that was changed. 
+        tests:
+          - not_null
+      - name: product_id
+        description: The old product id associated with the subscription.
+        tests:
+          - not_null
+      - name: happened_at
+        description: The date the record was created.
+        tests:
           - not_null
