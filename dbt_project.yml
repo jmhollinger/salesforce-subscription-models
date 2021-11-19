@@ -33,5 +33,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   salesforce_subscription_models:
+    salesforce:
+      materialized: table
     subscription_data:
-      +materialized: view
+      materialized: table

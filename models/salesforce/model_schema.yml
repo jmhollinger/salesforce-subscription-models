@@ -1,5 +1,175 @@
-
 version: 2
 
 models:
-  - name: Account 
+  - name: leads
+    description: Represents a prospect or lead.
+    columns:
+      - name: lead_id
+        description: Globally unique string that identifies a record. 
+        tests:
+          - unique
+          - not_null
+      - name: ActionCadenceAssigneeId
+        description: The ID of the sales rep designated to work the lead through their assigned sales cadence. This field is available in API version 48.0 if you enabled High Velocity Sales.
+      - name: ActionCadenceId
+        description: The ID of the lead’s assigned sales cadence. This field is available in API version 48.0 if you enabled High Velocity Sales.
+      - name: ActivityMetricId
+        description: The ID of the related activity metric. This field is available in API version 48.0 if you enabled High Velocity Sales.
+      - name: Address
+        description: The compound form of the address. Read-only. For details on compound address fields, see Address Compound Fields.
+      - name: AnnualRevenue
+        description: Annual revenue for the lead’s company.
+      - name: City
+        description: City for the lead’s address.
+      - name: CleanStatus
+        description: Indicates the records clean status compared with Data.com. Values include - Matched, Different, Acknowledged, NotFound, Inactive, Pending, SelectMatch, or Skipped.
+      - name: Company
+        description: Required. The lead’s company.
+        tests:
+          - not_null
+      - name: CompanyDunsNumber
+        description: The Data Universal Numbering System (D-U-N-S) number, which is a unique, nine-digit number assigned to every business location in the Dun & Bradstreet database that has a unique, separate, and distinct operation. Industries and companies use D-U-N-S numbers as a global standard for business identification and tracking. Maximum size is 9 characters.
+      - name: ConnectionReceivedId
+        description: ID of the PartnerNetworkConnection that shared this record with your organization. This field is available if you enabled Salesforce to Salesforce.
+      - name: ConnectionSentId
+        description: ID of the PartnerNetworkConnection that you shared this record with. This field is available if you enabled Salesforce to Salesforce. This field is supported using API versions earlier than 15.0. In all other API versions, this field’s value is null. You can use the new PartnerNetworkRecordConnection object to forward records to connections.
+      - name: ConvertedAccountId
+        description: Object reference ID that points to the account into which the lead converted.
+      - name: ConvertedContactId
+        description: Object reference ID that points to the contact into which the lead converted.
+      - name: ConvertedDate
+        description: Date on which this lead was converted.
+      - name: ConvertedOpportunityId
+        description: Object reference ID that points to the opportunity into which the lead has been converted.
+      - name: Country
+        description: The lead’s country.
+      - name: CountryCode
+        description: The ISO country code for the lead’s address.
+      - name: CurrencyIsoCode
+        description: Available only for organizations with the multicurrency feature enabled. Contains the ISO code for any currency allowed by the organization.
+      - name: Description
+        description: The lead’s description.
+      - name: Division
+        description: A logical segment of your organizations data. For example, if your company is organized into different business units, you could create a division for each business unit, such as “North America,” “Healthcare,” or “Consulting.” Available only if the organization has the Division permission enabled.
+      - name: Email
+        description: The lead’s email address.
+      - name: EmailBouncedDate
+        description: If bounce management is activated and an email sent to the lead bounced, the date and time of the bounce.
+      - name: EmailBouncedReason
+        description: If bounce management is activated and an email sent to the lead bounced, the reason for the bounce.
+      - name: Fax
+        description: The lead’s fax number.
+      - name: FirstCallDateTime
+        description: The date and time of the first call placed to the lead. This field is available in API version 48.0 if you enabled High Velocity Sales.
+      - name: FirstEmailDateTime
+        description: The date and time of the first email sent to the lead. This field is available in API version 48.0 if you enabled High Velocity Sales.
+      - name: FirstName
+        description: The lead’s first name up to 40 characters.
+      - name: HasOptedOutOfEmail
+        description: Indicates whether the lead doesn’t want to receive email from Salesforce (true) or does (false). Label is Email Opt Out.
+        tests:
+          - not_null
+      - name: HasOptedOutOfFax
+        description: Indicates whether the lead doesn’t want to receive faxes from Salesforce (true) or does (false). Label is FaxOpt Out.
+        tests:
+          - not_null
+      - name: GeocodeAccuracy
+        description: Accuracy level of the geocode for the address. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+      - name: IndividualId
+        description: ID of the data privacy record associated with this lead. This field is available if you enabled Data Protection and Privacy in Setup.
+      - name: Industry
+        description: Industry in which the lead works.
+      - name: IsConverted
+        description: Indicates whether the lead has been converted (true) or not (false). Label is Converted.
+        tests:
+          - not_null
+      - name: IsDeleted
+        description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+        tests:
+          - not_null
+      - name: IsUnreadByOwner
+        description: If true, lead has been assigned, but not yet viewed. See Unread Leads for more information. Label is Unread By Owner.
+        tests:
+          - not_null
+      - name: Jigsaw
+        description: References the ID of a contact in Data.com. If a lead has a value in this field, it means that a contact was imported as a lead from Data.com. If the contact (converted to a lead) wasn’t imported from Data.com, the field value is null. Maximum size is 20 characters. Available in API version 22.0 and later. Label is Data.com Key.
+      - name: LastActivityDate
+        description: Value is the most recent of either - Due date of the most recent event logged against the record. Due date of the most recently closed task associated with the record.
+      - name: LastName
+        description: Required. Last name of the lead up to 80 characters.
+      - name: LastReferencedDate
+        description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+      - name: LastViewedDate
+        description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+      - name: Latitude
+        description: Used with Longitude to specify the precise geolocation of an address. Acceptable values are numbers between –90 and 90 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+      - name: Longitude
+        description: Used with Latitude to specify the precise geolocation of an address. Acceptable values are numbers between –180 and 180 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+      - name: LeadSource
+        description: The lead’s source.
+      - name: MasterRecordId
+        description: If this record was deleted as the result of a merge, this field contains the ID of the record that was kept. If this record was deleted for any other reason, or has not been deleted, the value is null.
+      - name: MiddleName
+        description: The lead’s middle name up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+      - name: MobilePhone
+        description: The lead’s mobile phone number.
+      - name: Name
+        description: Concatenation of FirstName, MiddleName, LastName, and Suffix up to 203 characters, including whitespaces.
+      - name: NumberOfEmployees
+        description: Number of employees at the lead’s company. Label is Employees.
+      - name: OwnerId
+        description: ID of the lead’s owner.
+        tests:
+          - not_null
+      - name: PartnerAccountId
+        description: ID of the partner account for the partner user that owns this lead. Available if Partner Relationship Management is enabled or if digital experiences is enabled and you have partner portal licenses.
+      - name: Phone
+        description: The lead’s phone number.
+      - name: PhotoUrl
+        description: The url of this lead's photo.
+      - name: PostalCode
+        description: Postal code for the address of the lead. Label is Zip/Postal Code.
+      - name: Rating
+        description: Rating of the lead.
+      - name: RecordTypeId
+        description: ID of the record type assigned to this object.
+      - name: Salutation
+        description: Salutation for the lead.
+      - name: ScoreIntelligenceId
+        description: The ID of the intelligent field record that contains lead score.
+      - name: State
+        description: State for the address of the lead.
+      - name: StateCode
+        description: The ISO state code for the lead’s address.
+      - name: Status
+        description: Status code for this converted lead. Status codes are defined in Status and represented in the API by the LeadStatus object.
+        tests:
+          - not_null
+      - name: Street
+        description: Street number and name for the address of the lead.
+      - name: Suffix
+        description: The lead’s name suffix up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+      - name: Title
+        description: Title for the lead, such as CFO or CEO.
+      - name: Website
+        description: Website for the lead.
+      - name: CreatedById
+        description: ID of the User who created this record. 
+        tests:
+          - not_null
+      - name: CreatedDate
+        description: Date and time when this record was created.
+        tests:
+          - not_null
+      - name: LastModifiedById
+        description: ID of the User who last updated this record.
+        tests:
+          - not_null
+      - name: LastModifiedDate
+        description: Date and time when a user last modified this record.
+        tests:
+          - not_null
+      - name: SystemModstamp
+        description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+        tests:
+          - not_null

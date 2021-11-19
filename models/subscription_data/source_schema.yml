@@ -1,5 +1,6 @@
 version: 2
 
+
 sources:
   - name: subscription_data
     database: jonathanhollinger
@@ -11,9 +12,8 @@ sources:
         description: Each record is a subscription to a specific product. Products for a specific subscription may change over time. 
         columns:
           - name: subscription_id
-            description: The primary key and id of the subscription
+            description: The id of the subscription
             tests:
-              - unique
               - not_null
           - name: product_id
             description: The product id associated with the subscritption. This field is mutable.

@@ -1,5 +1,659 @@
 version: 2
 
+
 sources:
   - name: salesforce_data
-    description : This is replicated app data from Postgres related to subscriptions.
+    database: jonathanhollinger
+    schema: public
+    description : This is replicated salesforce data for select standard objects.
+    
+    tables:
+      - name: account
+        description: Represents an individual account, which is an organization or person involved with your business (such as customers, competitors, and partners).
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountSource  
+            description: The source of the account record. For example, Advertisement, Data.com, or Trade Show. The source is selected from a picklist of available values, which are set by an administrator. Each picklist value can have up to 40 characters.
+          - name: AnnualRevenue
+            description: Estimated annual revenue of the account.
+          - name: BillingAddress
+            description: The compound form of the billing address. Read-only. See Address Compound Fields for details on compound address fields.
+          - name: BillingCity
+            description: Details for the billing address of this account. Maximum size is 40 characters.
+          - name: BillingCountry
+            description: Details for the billing address of this account. Maximum size is 80 characters.
+          - name: BillingCountryCode
+            description: The ISO country code for the account’s billing address.
+          - name: BillingGeocodeAccuracy
+            description: Accuracy level of the geocode for the billing address. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: BillingLatitude
+            description: Used with BillingLongitude to specify the precise geolocation of a billing address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: BillingLongitude
+            description: Used with BillingLatitude to specify the precise geolocation of a billing address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: BillingPostalCode
+            description: Details for the billing address of this account. Maximum size is 20 characters.
+          - name: BillingState
+            description: Details for the billing address of this account. Maximum size is 80 characters.
+          - name: BillingStateCode
+            description: The ISO state code for the account’s billing address.
+          - name: BillingStreet
+            description: Street address for the billing address of this account.
+          - name: ChannelProgramName
+            description: Read only. Name of the channel program the account has enrolled. If this account has enrolled more than one channel program, the oldest 
+          - name: ChannelProgramLevelName
+            description: Read only. Name of the channel program level the account has enrolled.
+          - name: CleanStatus
+            description: Indicates the record’s clean status as compared with Data.com. Values are Matched, Different, Acknowledged, NotFound, Inactive, Pending, SelectMatch, or Skipped.
+          - name: ConnectionReceivedId
+            description: ID of the PartnerNetworkConnection that shared this record with your organization. This field is available if you enabled Salesforce to Salesforce.
+          - name: ConnectionSentId
+            description: ID of the PartnerNetworkConnection that you shared this record with. This field is available if you enabled Salesforce to Salesforce. This field is supported using API versions earlier than 15.0. In all other API versions, this field’s value is null. You can use the new PartnerNetworkRecordConnection object to forward records to connections.
+          - name: Description
+            description: Text description of the account. Limited to 32,000 KB.
+          - name: DunsNumber
+            description: The Data Universal Numbering System (D-U-N-S) number is a unique, nine-digit number assigned to every business location in the Dun & Bradstreet database that has a unique, separate, and distinct operation. D-U-N-S numbers are used by industries and organizations around the world as a global standard for business identification and tracking. Maximum size is 9 characters. This field is available on business accounts, not person accounts.
+          - name: Fax
+            description: Fax number for the account.
+          - name: HasOptedOutOfEmail
+            description: Indicates whether the contact doesn’t want to receive email from Salesforce (true) or does (false). Label is Email Opt Out.
+            tests:
+              - not_null
+          - name: Industry
+            description: An industry associated with this account. Maximum size is 40 characters.
+          - name: IsCustomerPortal
+            description: Indicates whether the account has at least one contact enabled to use the orgs Customer Portal (true) or not (false). This field is available if Customer Portal is enabled OR digital experiences is enabled and you have Customer Portal licenses.If you change this fields value from true to false, you can disable up to 100 Customer Portal users associated with the account and permanently delete all of the accounts Customer Portal roles and groups. You cant restore deleted Customer Portal roles and groups.
+            tests:
+              - not_null
+          - name: IsDeleted  
+            description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+            tests:
+              - not_null
+          - name: IsPartner  
+            description: Indicates whether the account has at least one contact enabled to use the orgs partner portal (true) or not (false). This field is available if partner relationship management (partner portal) is enabled ORdigitial experiences is enabled and you have partner portal licenses.If you change this fields value from true to false, you can disable up to 15 partner portal users associated with the account and permanently delete all of the accounts partner portal roles and groups. You cant restore deleted partner portal roles and groups.
+            tests:
+              - not_null
+          - name: IsPersonAccount  
+            description: Read only. Label is Is Person Account. Indicates whether this account has a record type of Person Account (true) or not (false).
+            tests:
+              - not_null
+          - name: Jigsaw
+            description: References the ID of a company in Data.com. If an account has a value in this field, it means that the account was imported from Data.com. If the field value is null, the account was not imported from Data.com. Maximum size is 20 characters. Available in API version 22.0 and later. Label is Data.com Key. This field is available on business accounts, not person accounts.
+          - name: LastActivityDate
+            description: Value is one of the following, whichever is the most recent:Due date of the most recent event logged against the record.
+          - name: LastReferencedDate
+            description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+          - name: LastViewedDate
+            description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+          - name: MasterRecordId
+            description: If this object was deleted as the result of a merge, this field contains the ID of the record that was kept. If this object was deleted for any other reason, or has not been deleted, the value is null.This is a relationship field.Relationship NameMasterRecordRelationship TypeLookupRefers ToAccount
+          - name: NaicsCode
+            description: The six-digit North American Industry Classification System (NAICS) code is the standard used by business and government to classify business establishments into industries, according to their economic activity for the purpose of collecting, analyzing, and publishing statistical data related to the U.S. business economy. Maximum size is 8 characters. This field is available on business accounts, not person accounts.
+          - name: NaicsDesc
+            description: A brief description of an org’s line of business, based on its NAICS code. Maximum size is 120 characters. This field is available on business accounts, not person accounts.
+          - name: Name
+            description: Required. Label is Account Name. Name of the account. Maximum size is 255 characters. If the account has a record type of Person Account:This value is the concatenation of the FirstName, MiddleName, LastName, and Suffix of the associated person contact.
+            tests:
+              - not_null
+          - name: NumberOfEmployees
+            description: Label is Employees. Number of employees working at the company represented by this account. Maximum size is eight digits.
+          - name: OperatingHoursId
+            description: The operating hours associated with the account. Available only if Field Service is enabled.This is a relationship field.Relationship NameOperatingHoursRelationship TypeLookupRefers ToOperatingHours
+          - name: OwnerId
+            description: The ID of the user who currently owns this account. Default value is the user logged in to the API to perform the create.If you have set up account teams in your org, updating this field has different consequences depending on your version of the API.
+            tests:
+              - not_null
+          - name: Ownership
+            description: Ownership type for the account, for example Private, Public, or Subsidiary.
+          - name: ParentId
+            description: ID of the parent object, if any.This is a relationship field.Relationship NameParentRelationship TypeLookupRefers ToAccount
+          - name: PersonIndividualId
+            description: ID of the data privacy record associated with this person’s account. This field is available if you enabled Data Protection and Privacy in Setup.Available in API version 42.0 and later.
+          - name: Phone
+            description: Phone number for this account. Maximum size is 40 characters.
+          - name: PhotoUrl
+            description: Path to be combined with the URL of a Salesforce instance (for example, https://yourInstance.salesforce.com/) to generate a URL to request the social network profile image associated with the account. Generated URL returns an HTTP redirect (code 302) to the social network profile image for the account.
+          - name: Rating
+            description: The account’s prospect rating, for example Hot, Warm, or Cold.
+          - name: RecordTypeId
+            description: ID of the record type assigned to this object.
+          - name: Salutation
+            description: Honorific added to the name for use in letters, etc.
+          - name: ShippingAddress
+            description: The compound form of the shipping address. Read-only. See Address Compound Fields for details on compound address fields.
+          - name: ShippingCity
+            description: Details of the shipping address for this account. City maximum size is 40 characters
+          - name: ShippingCountry
+            description: Details of the shipping address for this account. Country maximum size is 80 characters.
+          - name: ShippingCountryCode
+            description: The ISO country code for the account’s shipping address.
+          - name: ShippingGeocodeAccuracy
+            description: Accuracy level of the geocode for the shipping address. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: ShippingLatitude
+            description: Used with ShippingLongitude to specify the precise geolocation of a shipping address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: ShippingLongitude
+            description: Used with ShippingLatitude to specify the precise geolocation of an address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: ShippingPostalCode
+            description: Details of the shipping address for this account. Postal code maximum size is 20 characters.
+          - name: ShippingState
+            description: Details of the shipping address for this account. State maximum size is 80 characters.
+          - name: ShippingStateCode
+            description: The ISO state code for the account’s shipping address.
+          - name: ShippingStreet
+            description: The street address of the shipping address for this account. Maximum of 255 characters.
+          - name: Sic
+            description: Standard Industrial Classification code of the company’s main business categorization, for example, 57340 for Electronics. Maximum of 20 characters. This field is available on business accounts, not person accounts.
+          - name: SicDesc
+            description: A brief description of an org’s line of business, based on its SIC code. Maximum length is 80 characters. This field is available on business accounts, not person accounts.
+          - name: Site
+            description: Name of the account’s location, for example Headquarters or London. Label is Account Site. Maximum of 80 characters.
+          - name: TickerSymbol
+            description: The stock market symbol for this account. Maximum of 20 characters. This field is available on business accounts, not person accounts.
+          - name: Tradestyle
+            description: A name, different from its legal name, that an org may use for conducting business. Similar to “Doing business as” or “DBA”. Maximum length is 255 characters. This field is available on business accounts, not person accounts.
+          - name: Type
+            description: Type of account, for example, Customer, Competitor, or Partner.
+          - name: Website
+            description: The website of this account. Maximum of 255 characters.
+          - name: YearStarted
+            description: The date when an org was legally established. Maximum length is 4 characters. This field is available on business accounts, not person accounts.
+          - name: FirstName
+            description: First name of the person for a person account. Maximum size is 40 characters.
+          - name: LastName
+            description: Last name of the person for a person account. Required if the record type is a person account record type. Maximum size is 80 characters.
+          - name: MiddleName
+            description: Middle name of the person for a person account. Maximum size is 40 characters. Contact Salesforce Customer Support to enable this field.
+          - name: PersonAssistantName
+            description: The person account’s assistant name. Label is Assistant. Maximum size is 40 characters.
+          - name: PersonAssistantPhone
+            description: The person account’s assistant phone. Label is Asst. Phone. Maximum size is 40 characters.
+          - name: PersonBirthDate
+            description: The assistant name. Label is Birthdate.
+          - name: PersonContactId
+            description: The ID for the contact associated with this person account. Label is Contact ID.
+          - name: PersonDepartment
+            description: The department. Label is Department. Maximum size is 80 characters.
+          - name: PersonEmail
+            description: Email address for this person account. Label is Email.
+          - name: PersonEmailBouncedDate
+            description: If bounce management is activated and an email sent to the person account bounces, the date and time the bounce occurred.
+          - name: PersonEmailBouncedReason
+            description: If bounce management is activated and an email sent to the person account bounces, the reason the bounce occurred
+          - name: PersonHasOptedOutOfEmail
+            description: Indicates whether the person account has opted out of email (true) or not (false). Label is Email Opt Out.
+            tests:
+              - not_null
+          - name: PersonHomePhone
+            description: The home phone number for this person account. Label is Home Phone.
+          - name: PersonLeadSource
+            description: The person account’s lead source. Label is Lead Source.
+          - name: PersonMailingAddress
+            description: The compound form of the person account mailing address. Read-only. See Address Compound Fields for details on compound address fields.
+          - name: PersonMailingCity
+            description: Details about the person account’s mailing city. Labels are Mailing City, Mailing Country, Postal Code, and State. Maximum size for city and country is 40 characters. Maximum size for postal code and state is 20 characters.
+          - name: PersonMailingGeocodeAccuracy
+            description: Accuracy level of the geocode for the person’s mailing address. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: PersonMailingLatitude
+            description: Used with PersonMailingLongitude to specify the precise geolocation of a person account’s mailing address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: PersonMailingLongitude
+            description: Used with PersonMailingLatitude to specify the precise geolocation of a person account’s mailing address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: PersonMailingStreet
+            description: The mailing street address for this person account. Label is Mailing Street. Maximum size is 255 characters.
+          - name: PersonMobilePhone
+            description: The mobile phone number for this person account. Label is Mobile.
+          - name: PersonOtherCity
+            description: Details about the alternate address for this person account. Labels are Other City, Other Country, Other Zip/Postal Code, and Other State.
+          - name: PersonOtherCountry
+            description: Details about the alternate address for this person account. Labels are Other City, Other Country, Other Zip/Postal Code, and Other State.
+          - name: PersonOtherPostalCode
+            description: Details about the alternate address for this person account. Labels are Other City, Other Country, Other Zip/Postal Code, and Other State.
+          - name: PersonOtherState
+            description: Details about the alternate address for this person account. Labels are Other City, Other Country, Other Zip/Postal Code, and Other State.
+          - name: PersonOtherCountryCode
+            description: Details about the alternate address for this person account. Labels are Other City, Other Country, Other Zip/Postal Code, and Other State.
+          - name: PersonOtherStateCode  
+            description: The ISO country or state code for the alternate address of the person account.
+          - name: PersonOtherLatitude
+            description: Used with PersonOtherLongitude to specify the precise geolocation of a person account’s alternate address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: PersonOtherLongitude
+            description: Used with PersonOtherLatitude to specify the precise geolocation of a person account’s alternate address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places. See Compound Field Considerations and Limitations for details on geolocation compound fields.
+          - name: PersonOtherPhone
+            description: The alternate phone number for this person account. Label is Other Phone.
+          - name: PersonOtherStreet
+            description: The person account’s alternate street address. Label is Other Street.
+          - name: PersonTitle
+            description: The person account’s title. Label is Title. Maximum size is 80 characters.
+          - name: Suffix
+            description: Name suffix of the person for a person account. Maximum size is 40 characters. Contact Salesforce Customer Support to enable this field.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+
+      - name: account_brand
+        description: Represents the brand details of a Partner Account. This object is available in API version 43.0 and later.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountId
+            description: ID of the Account. This number is unique within your organization.
+            tests:
+              - not_null
+          - name: Address
+            description: The street address. 
+          - name: City
+            description: The city. 
+          - name: CompanyName
+            description: The name of the company associated with the account brand.
+          - name: Country
+            description: The country where the account is physically located.
+          - name: Email
+            description: Email address associated with the account.
+          - name: GeocodeAccuracy
+            description: Stores data for accurate geocoded location. 
+          - name: LastReferencedDate
+            description: Most recent date referenced.
+          - name: LastViewedDate
+            description: Most recent date viewed.
+          - name: Latitude
+            description: Used along with Longitude to specify the precise geolocation of an address.
+          - name: LogoId
+            description: ID of the logo.
+          - name: LogoUrl
+            description: URL of the logo. This field is available in API version 44.0 and later.
+          - name: Longitude
+            description: Used with Latitude to specify the precise geolocation of an address.
+          - name: Name
+            description: Required. Name of the account.
+            tests:
+              - not_null
+          - name: OwnerId
+            description: Required. ID of the Owner.
+            tests:
+              - not_null
+          - name: Phone
+            description: Phone number.
+          - name: PostalCode
+            description: The postal code where the user’s IP address is physically located.
+          - name: State
+            description: The address state.
+          - name: Street
+            description: The address street.
+          - name: Website
+            description: Website for the Account Brand.           
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+
+      - name: account_partner
+        description: This object represents a partner relationship between two Account records. An AccountPartner record is created automatically when a Partner record is created for a partner relationship between two accounts.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountFromId
+            description: ID of the main Account in the partner relationship.
+            tests:
+              - not_null
+          - name: AccountToId
+            description: ID of the partner Account in the partner relationship.
+            tests:
+              - not_null
+          - name: IsPrimary
+            description: Indicates whether the AccountPartner is the main account’s primary partner (true) or not (false).
+            tests:
+              - not_null
+          - name: OpportunityId
+            description: ID of the opportunity in a partner relationship.
+          - name: ReversePartnerId
+            description: ID of the account in a partner relationship.
+          - name: Role
+            description: The UserRole that the partner Account has on the main Account. For example, Consultant or Distributor
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+
+      - name: address
+        description: Represents a mailing, billing, or home address.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: Address
+            description: The full address.
+          - name: AddressType
+            description: Picklist of address types. The values are - Mailing, Shipping, Billing, Home
+          - name: City
+            description: The address city.
+          - name: Country
+            description: The address country.
+          - name: Description
+            description: A brief description of the address.
+          - name: DrivingDirections
+            description: Directions to the address.
+          - name: GeocodeAccuracy
+            description: The level of accuracy of a location’s geographical coordinates compared with its physical address. A geocoding service typically provides this value based on the address’s latitude and longitude coordinates.
+          - name: Latitude
+            description: Used with Longitude to specify the precise geolocation of the address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places.
+          - name: LocationType
+            description: Picklist of location types. The available values are - Warehouse, Site, Van, Plant
+          - name: Longitude
+            description: Used with Latitude to specify the precise geolocation of the address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places.
+          - name: Name
+            description: An auto-generated number identifying the address.
+          - name: ParentId
+            description: A lookup field to the parent location.
+          - name: PostalCode
+            description: The address postal code.
+          - name: State
+            description: The address state.
+          - name: Street
+            description: The address street.
+          - name: TimeZone
+            description: Picklist of available time zones.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null                
+
+      - name: lead
+        description: Represents a prospect or lead.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: ActionCadenceAssigneeId
+            description: The ID of the sales rep designated to work the lead through their assigned sales cadence. This field is available in API version 48.0 if you enabled High Velocity Sales.
+          - name: ActionCadenceId
+            description: The ID of the lead’s assigned sales cadence. This field is available in API version 48.0 if you enabled High Velocity Sales.
+          - name: ActivityMetricId
+            description: The ID of the related activity metric. This field is available in API version 48.0 if you enabled High Velocity Sales.
+          - name: Address
+            description: The compound form of the address. Read-only. For details on compound address fields, see Address Compound Fields.
+          - name: AnnualRevenue
+            description: Annual revenue for the lead’s company.
+          - name: City
+            description: City for the lead’s address.
+          - name: CleanStatus
+            description: Indicates the record’s clean status compared with Data.com. Values include - Matched, Different, Acknowledged, NotFound, Inactive, Pending, SelectMatch, or Skipped.
+          - name: Company
+            description: Required. The lead’s company.
+            tests:
+              - not_null
+          - name: CompanyDunsNumber
+            description: The Data Universal Numbering System (D-U-N-S) number, which is a unique, nine-digit number assigned to every business location in the Dun & Bradstreet database that has a unique, separate, and distinct operation. Industries and companies use D-U-N-S numbers as a global standard for business identification and tracking. Maximum size is 9 characters.
+          - name: ConnectionReceivedId
+            description: ID of the PartnerNetworkConnection that shared this record with your organization. This field is available if you enabled Salesforce to Salesforce.
+          - name: ConnectionSentId
+            description: ID of the PartnerNetworkConnection that you shared this record with. This field is available if you enabled Salesforce to Salesforce. This field is supported using API versions earlier than 15.0. In all other API versions, this field’s value is null. You can use the new PartnerNetworkRecordConnection object to forward records to connections.
+          - name: ConvertedAccountId
+            description: Object reference ID that points to the account into which the lead converted.
+          - name: ConvertedContactId
+            description: Object reference ID that points to the contact into which the lead converted.
+          - name: ConvertedDate
+            description: Date on which this lead was converted.
+          - name: ConvertedOpportunityId
+            description: Object reference ID that points to the opportunity into which the lead has been converted.
+          - name: Country
+            description: The lead’s country.
+          - name: CountryCode
+            description: The ISO country code for the lead’s address.
+          - name: CurrencyIsoCode
+            description: Available only for organizations with the multicurrency feature enabled. Contains the ISO code for any currency allowed by the organization.
+          - name: Description
+            description: The lead’s description.
+          - name: Division
+            description: A logical segment of your organizations data. For example, if your company is organized into different business units, you could create a division for each business unit, such as “North America,” “Healthcare,” or “Consulting.” Available only if the organization has the Division permission enabled.
+          - name: Email
+            description: The lead’s email address.
+          - name: EmailBouncedDate
+            description: If bounce management is activated and an email sent to the lead bounced, the date and time of the bounce.
+          - name: EmailBouncedReason
+            description: If bounce management is activated and an email sent to the lead bounced, the reason for the bounce.
+          - name: Fax
+            description: The lead’s fax number.
+          - name: FirstCallDateTime
+            description: The date and time of the first call placed to the lead. This field is available in API version 48.0 if you enabled High Velocity Sales.
+          - name: FirstEmailDateTime
+            description: The date and time of the first email sent to the lead. This field is available in API version 48.0 if you enabled High Velocity Sales.
+          - name: FirstName
+            description: The lead’s first name up to 40 characters.
+          - name: HasOptedOutOfEmail
+            description: Indicates whether the lead doesn’t want to receive email from Salesforce (true) or does (false). Label is Email Opt Out.
+            tests:
+              - not_null
+          - name: HasOptedOutOfFax
+            description: Indicates whether the lead doesn’t want to receive faxes from Salesforce (true) or does (false). Label is FaxOpt Out.
+            tests:
+              - not_null
+          - name: GeocodeAccuracy
+            description: Accuracy level of the geocode for the address. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: IndividualId
+            description: ID of the data privacy record associated with this lead. This field is available if you enabled Data Protection and Privacy in Setup.
+          - name: Industry
+            description: Industry in which the lead works.
+          - name: IsConverted
+            description: Indicates whether the lead has been converted (true) or not (false). Label is Converted.
+            tests:
+              - not_null
+          - name: IsDeleted
+            description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+            tests:
+              - not_null
+          - name: IsUnreadByOwner
+            description: If true, lead has been assigned, but not yet viewed. See Unread Leads for more information. Label is Unread By Owner.
+            tests:
+              - not_null
+          - name: Jigsaw
+            description: References the ID of a contact in Data.com. If a lead has a value in this field, it means that a contact was imported as a lead from Data.com. If the contact (converted to a lead) wasn’t imported from Data.com, the field value is null. Maximum size is 20 characters. Available in API version 22.0 and later. Label is Data.com Key.
+          - name: LastActivityDate
+            description: Value is the most recent of either - Due date of the most recent event logged against the record. Due date of the most recently closed task associated with the record.
+          - name: LastName
+            description: Required. Last name of the lead up to 80 characters.
+          - name: LastReferencedDate
+            description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+          - name: LastViewedDate
+            description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+          - name: Latitude
+            description: Used with Longitude to specify the precise geolocation of an address. Acceptable values are numbers between –90 and 90 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: Longitude
+            description: Used with Latitude to specify the precise geolocation of an address. Acceptable values are numbers between –180 and 180 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: LeadSource
+            description: The lead’s source.
+          - name: MasterRecordId
+            description: If this record was deleted as the result of a merge, this field contains the ID of the record that was kept. If this record was deleted for any other reason, or has not been deleted, the value is null.
+          - name: MiddleName
+            description: The lead’s middle name up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+          - name: MobilePhone
+            description: The lead’s mobile phone number.
+          - name: Name
+            description: Concatenation of FirstName, MiddleName, LastName, and Suffix up to 203 characters, including whitespaces.
+          - name: NumberOfEmployees
+            description: Number of employees at the lead’s company. Label is Employees.
+          - name: OwnerId
+            description: ID of the lead’s owner.
+            tests:
+              - not_null
+          - name: PartnerAccountId
+            description: ID of the partner account for the partner user that owns this lead. Available if Partner Relationship Management is enabled or if digital experiences is enabled and you have partner portal licenses.
+          - name: Phone
+            description: The lead’s phone number.
+          - name: PhotoUrl
+            description: The url of this lead's photo.
+          - name: PostalCode
+            description: Postal code for the address of the lead. Label is Zip/Postal Code.
+          - name: Rating
+            description: Rating of the lead.
+          - name: RecordTypeId
+            description: ID of the record type assigned to this object.
+          - name: Salutation
+            description: Salutation for the lead.
+          - name: ScoreIntelligenceId
+            description: The ID of the intelligent field record that contains lead score.
+          - name: State
+            description: State for the address of the lead.
+          - name: StateCode
+            description: The ISO state code for the lead’s address.
+          - name: Status
+            description: Status code for this converted lead. Status codes are defined in Status and represented in the API by the LeadStatus object.
+            tests:
+              - not_null
+          - name: Street
+            description: Street number and name for the address of the lead.
+          - name: Suffix
+            description: The lead’s name suffix up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+          - name: Title
+            description: Title for the lead, such as CFO or CEO.
+          - name: Website
+            description: Website for the lead.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+
+      - name: approval
+        description: Represents an approval request for a Contract.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: ApproveComment
+            description: Text entered by the user when they approved or rejected this approval request. Required. Limit - 4,000 characters.
+          - name: IsDeleted
+            description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+            tests:
+              - not_null
+          - name: OwnerId
+            description: Required. ID of the User being asked to approve or reject the approval request. Must be a valid User ID. Required.
+            tests:
+              - not_null
+          - name: ParentId
+            description: Required. ID of the Contract associated with this approval request. Must be a valid contract ID.
+            tests:
+              - not_null
+          - name: RequestComment
+            description: Text entered by the User who created the approval request. Optional. This field can't be updated after the Approval has been created. Limit - 4,000 characters.
+          - name: Status
+            description: Required. Status of this approval request. One of the following picklist values - Pending, Approved, Rejected
+            tests:
+              - not_null
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+
+
+
+
