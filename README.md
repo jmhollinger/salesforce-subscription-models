@@ -17,7 +17,7 @@ The salesforce models in `models/subscription_data` includes a source schema for
   9. Campaign
   10. Contract
 
-A base model for `lead` is defined in `lead.sql` and documented in `model_schema.yml`.
+A base model for `lead` is defined in `salesforce_lead.sql` and documented in `model_schema.yml`.
 
 This follows the following style guidelines:
   
@@ -37,4 +37,4 @@ Both tables have a base model defined in `model_schema.yml`. There is a separate
 
 # Documentation
 
-To view the documentation site for this project, run `dbt docs serve` and visit http://localhost:8080.
+To view the auto-generated documentation site for this project, run `dbt docs serve` and visit http://localhost:8080.
