@@ -33,7 +33,9 @@ The subscription models in `models/subscription_data` includes a source schema f
   1. subscriptions
   2. subscription_change_log 
 
-Both tables have a base model defined in `model_schema.yml`. There is a separate model that combines this data in `subscription_history` and is also documented in `model_schema.yml`
+Both tables have a base model defined in `model_schema.yml`. 
+
+There is a separate model that combines this data in `subscription_history` and is also documented in `model_schema.yml`
 
 # Documentation
 
