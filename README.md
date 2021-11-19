@@ -12,24 +12,17 @@ The salesforce models in `models/subscription_data` includes a source schema for
   4. Address
   5. Contact
   6. Approval
-  7. Opportunity
+  7. Asset
   8. Lead
   9. Campaign
   10. Contract
-
-  To Do:
-  - Fix Model Schema column names
-  - Complete Source Schema
-    - Contact
-    - Opportunity
-    - Campaign
-    - Contract
 
 A base model for `lead` is defined in `lead.sql` and documented in `model_schema.yml`.
 
 This follows the following style guidelines:
   
-  - All column names are lower case snake case (i.e column_name).
+  - All column names are lower-case snake case (i.e column_name)
+  - Boolean fields are prefexied with is_ (i.e. is_deleted, is_active)
   - Date and time references end in _at (i.e created_at, received_at)
   - References to IDs end in _id and are scoped to the object/domain (i.e lead_id, account_id, user_id)
 

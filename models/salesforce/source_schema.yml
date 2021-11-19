@@ -654,6 +654,585 @@ sources:
             tests:
               - not_null
 
+      - name: contact
+        description: Represents a contact, which is a person associated with an account.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountId
+            description: ID of the account that’s the parent of this contact.
+          - name: AssistantName
+            description: The assistant’s name.
+          - name: AssistantPhone
+            description: The assistant’s telephone number.
+          - name: Birthdate
+            description: The contact’s birthdate.
+          - name: CanAllowPortalSelfReg
+            description: Indicates whether this contact can self-register for your Customer Portal (true) or not (false).
+            tests:
+              - not_null
+          - name: CleanStatus
+            description: Indicates the record’s clean status as compared with Data.com. Values include - Matched, Different, Acknowledged, NotFound, Inactive, Pending, SelectMatch, or Skipped.
+          - name: ConnectionReceivedId
+            description: ID of the PartnerNetworkConnection that shared this record with your organization. This field is available if you enabled Salesforce to Salesforce.
+          - name: ConnectionSentId
+            description: ID of the PartnerNetworkConnection that you shared this record with. This field is available if you enabled Salesforce to Salesforce. This field is supported using API versions earlier than 15.0. In all other API versions, this field’s value is null. You can use the new PartnerNetworkRecordConnection object to forward records to connections.
+          - name: Department
+            description: The contact’s department.
+          - name: Description
+            description: A description of the contact. Label is Contact Description up to 32 KB.
+          - name: DoNotCall
+            description: Indicates that the contact does not want to receive calls.
+            tests:
+              - not_null
+          - name: Email
+            description: The contact’s email address.
+          - name: EmailBouncedDate
+            description: If bounce management is activated and an email sent to the contact bounces, the date and time of the bounce.
+          - name: EmailBouncedReason
+            description: If bounce management is activated and an email sent to the contact bounces, the reason for the bounce.
+          - name: Fax
+            description: The contact’s fax number. Label is Business Fax.
+          - name: FirstCallDateTime
+            description: The date and time of the first call placed to the contact. This field is available in API version 48.0 and later if you enabled High Velocity Sales.
+          - name: FirstEmailDateTime
+            description: The date and time of the first email sent to the contact. This field is available in API version 48.0 and later if you enabled High Velocity Sales.
+          - name: FirstName
+            description: The contact’s first name up to 40 characters.
+          - name: HasOptedOutOfEmail
+            description: Indicates whether the contact doesn’t want to receive email from Salesforce (true) or does (false). Label is Email Opt Out.
+            tests:
+              - not_null
+          - name: HasOptedOutOfFax
+            description: Indicates whether the contact prohibits receiving faxes.
+            tests:
+              - not_null
+          - name: HomePhone
+            description: The contact’s home telephone number.
+          - name: IndividualId
+            description: ID of the data privacy record associated with this contact. This field is available if Data Protection and Privacy is enabled.
+          - name: IsDeleted
+            description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+            tests:
+              - not_null
+          - name: IsEmailBounced
+            description: If bounce management is activated and an email is sent to a contact, indicates whether the email bounced (true) or not (false).
+            tests:
+              - not_null
+          - name: IsPersonAccount
+            description: Read only. Indicates whether this account has a record type of Person Account (true) or not (false). Label is Is Person Account.
+            tests:
+              - not_null
+          - name: Jigsaw
+            description: References the company’s ID in Data.com. If an account has a value in this field, it means that the account was imported from Data.com. If the field value is null, the account was not imported from Data.com. Maximum size is 20 characters. Available in API version 22.0 and later. Label is Data.com Key.
+          - name: LastActivityDate
+            description: Value is the most recent of either - Due date of the most recent event logged against the record. Due date of the most recently closed task associated with the record.
+          - name: LastName
+            description: Required. Last name of the contact up to 80 characters.
+          - name: LastReferencedDate
+            description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+          - name: LastViewedDate
+            description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+          - name: LeadSource
+            description: The lead’s source.
+          - name: MailingAddress
+            description: The compound form of the mailing address. Read-only. For details on compound address fields, see Address Compound Fields.
+          - name: MailingCity
+            description: Mailing address details.
+          - name: MailingState
+            description: Mailing address details.
+          - name: MailingCountry
+            description: Mailing address details.
+          - name: MailingPostalCode
+            description: Mailing address details.
+          - name: MailingStateCode
+            description: The ISO codes for the mailing address’s state and country.
+          - name: MailingCountryCode
+            description: The ISO codes for the mailing address’s state and country.
+          - name: MailingStreet
+            description: Street address for mailing address.
+          - name: MailingGeocodeAccuracy
+            description: Accuracy level of the geocode for the mailing address. For details on geolocation compound field, see Compound Field Considerations and Limitations.
+          - name: MailingLatitude
+            description: Used with MailingLongitude to specify the precise geolocation of a mailing address. Acceptable values are numbers between –90 and 90 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: MailingLongitude
+            description: Used with MailingLatitude to specify the precise geolocation of a mailing address. Acceptable values are numbers between –180 and 180 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: MasterRecordId
+            description: If this record was deleted as the result of a merge, this field contains the ID of the record that remains. If this record was deleted for any other reason, or has not been deleted, the value is null.
+          - name: MiddleName
+            description: The contact’s middle name up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+          - name: MobilePhone
+            description: Contact’s mobile phone number.
+          - name: Name
+            description: Concatenation of FirstName, MiddleName, LastName, and Suffix up to 203 characters, including whitespaces.
+            tests:
+              - not_null
+          - name: OtherAddress
+            description: The compound form of the other address. Read-only. For details on compound address fields, see Address Compound Fields.
+          - name: OtherCity
+            description: Alternate address details.
+          - name: OtherCountry
+            description: Alternate address details.
+          - name: OtherPostalCode
+            description: Alternate address details.
+          - name: OtherState
+            description: Alternate address details.
+          - name: OtherCountryCode
+            description: The ISO codes for the alternate address’s state and country.
+          - name: OtherStateCode
+            description: The ISO codes for the alternate address’s state and country.
+          - name: OtherGeocodeAccuracy
+            description: Accuracy level of the geocode for the other address. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: OtherLatitude
+            description: Used with OtherLongitude to specify the precise geolocation of an alternate address. Acceptable values are numbers between –90 and 90 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: OtherLongitude
+            description: Used with OtherLatitude to specify the precise geolocation of an alternate address. Acceptable values are numbers between –180 and 180 up to 15 decimal places. For details on geolocation compound fields, see Compound Field Considerations and Limitations.
+          - name: OtherPhone
+            description: Telephone for alternate address.
+          - name: OtherStreet
+            description: Street for alternate address.
+          - name: OwnerId
+            description: The ID of the owner of the account associated with this contact.
+            tests:
+              - not_null
+          - name: Phone
+            description: Telephone number for the contact. Label is Business Phone.
+          - name: PhotoUrl
+            description: Photo URL
+          - name: RecordTypeId
+            description: ID of the record type assigned to this object.
+          - name: ReportsToId
+            description: This field doesn’t appear if IsPersonAccount is true.
+          - name: Salutation
+            description: Honorific abbreviation, word, or phrase to be used in front of name in greetings, such as Dr. or Mrs.
+          - name: Suffix
+            description: Name suffix of the contact up to 40 characters. To enable this field, ask Salesforce Customer Support for help.
+          - name: Title
+            description: Title of the contact, such as CEO or Vice President.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
 
+      - name: contract
+        description: Represents a contract (a business agreement) associated with an Account.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountId
+            description: Required. ID of the Account associated with this contract.
+            tests:
+              - not_null
+          - name: ActivatedById
+            description: ID of the User who activated this contract.
+          - name: ActivatedDate
+            description: Date and time when this contract was activated.
+          - name: BillingAddress
+            description: The compound form of the billing address. Read-only. See Address Compound Fields for details on compound address fields.
+          - name: BillingCity
+            description: Details for the billing address. Maximum size is 40 characters.
+          - name: BillingCountry
+            description: Details for the billing address of this account. Maximum size is 80 characters.
+          - name: BillingCountryCode
+            description: The ISO country code for the contract’s billing address.
+          - name: BillingGeocodeAccuracy
+            description: The accuracy of the geocode for the billing address.
+          - name: BillingLatitude
+            description: Used with BillingLongitude to specify the precise geolocation of a billing address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places.
+          - name: BillingLongitude
+            description: Used with BillingLatitude to specify the precise geolocation of a billing address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places.
+          - name: BillingPostalCode
+            description: Details for the billing address of this account. Maximum size is 20 characters.
+          - name: BillingState
+            description: Details for the billing address. Maximum size is 80 characters.
+          - name: BillingStateCode
+            description: The ISO state code for the contract’s billing address.
+          - name: BillingStreet
+            description: Street address for the billing address.
+          - name: CompanySignedDate
+            description: Date on which the contract was signed by your organization.
+          - name: CompanySignedId
+            description: ID of the User who signed the contract.
+          - name: ContractNumber
+            description: Number of the contract.
+            tests:
+              - unique
+              - not_null
+          - name: ContractTerm
+            description: Number of months that the contract is valid.
+          - name: CustomerSignedDate
+            description: Date on which the customer signed the contract.
+          - name: CustomerSignedId
+            description: ID of the Contact who signed this contract.
+          - name: CustomerSignedTitle
+            description: Title of the customer who signed the contract.
+          - name: Description
+            description: Description of the contract.
+          - name: EndDate
+            description: Read-only. Calculated end date of the contract. This value is calculated by adding the ContractTerm to the StartDate.
+          - name: IsDeleted
+            description: Indicates whether the object has been moved to the Recycle Bin (true) or not (false). Label is Deleted.
+            tests:
+              - not_null
+          - name: LastActivityDate
+            description: Value is one of the following, whichever is the most recent - Due date of the most recent event logged against the record. Due date of the most recently closed task associated with the record.
+          - name: LastApprovedDate
+            description: Last date the contract was approved.
+          - name: LastReferencedDate
+            description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+          - name: LastViewedDate
+            description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+          - name: OwnerExpirationNotice
+            description: Number of days ahead of the contract end date (15, 30, 45, 60, 90, and 120). Used to notify the owner in advance that the contract is ending.
+          - name: OwnerId
+            description: ID of the user who owns the contract.
+            tests:
+              - not_null
+          - name: Pricebook2Id
+            description: ID of the pricebook, if any, associated with this contract.
+          - name: RecordTypeId
+            description: ID of the record type assigned to this object.
+          - name: ShippingAddress
+            description: The compound form of the shipping address. Read-only. See Address Compound Fields for details on compound address fields.
+          - name: ShippingCity
+            description: Details of the shipping address. City maximum size is 40 characters.
+          - name: ShippingCountry
+            description: Details of the shipping address. Country maximum size is 80 characters.
+          - name: ShippingCountryCode
+            description: The ISO country code for the contract’s shipping address.
+          - name: ShippingLatitude
+            description: Used with ShippingLongitude to specify the precise geolocation of a shipping address. Acceptable values are numbers between –90 and 90 with up to 15 decimal places.
+          - name: ShippingLongitude
+            description: Used with ShippingLatitude to specify the precise geolocation of an address. Acceptable values are numbers between –180 and 180 with up to 15 decimal places.
+          - name: ShippingPostalCode
+            description: Details of the shipping address. Postal code maximum size is 20 characters.
+          - name: ShippingState
+            description: Details of the shipping address. State maximum size is 80 characters.
+          - name: ShippingStateCode
+            description: The ISO state code for the contract’s shipping address.
+          - name: ShippingStreet
+            description: The street address of the shipping address. Maximum of 255 characters.
+          - name: SpecialTerms
+            description: Special terms that apply to the contract.
+          - name: StartDate
+            description: Start date for this contract. Label is Contract Start Date.
+          - name: Status
+            description: The picklist of values that indicate order status. Each value is within one of two status categories defined in StatusCode. For example, the status picklist may contain -  Ready to Ship, Shipped, Received as values within the Activated StatusCode.
+            tests:
+              - not_null
+          - name: StatusCode
+            description: The status category for the contract. A contract can be Draft, InApproval, or Activated. Label is Status Category.
+            tests:
+              - not_null
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
 
-
+      - name: campaign
+        description: Represents and tracks a marketing campaign, such as a direct mail promotion, webinar, or trade show.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: ActualCost
+            description: Amount of money spent to run the campaign.
+          - name: AmountAllOpportunities
+            description: Amount of money in all opportunities associated with the campaign, including closed/won opportunities. Label is Value Opportunities in Campaign.
+            tests:
+              - not_null
+          - name: AmountWonOpportunities
+            description: Amount of money in closed or won opportunities associated with the campaign. Label is Value Won Opportunities in Campaign.
+            tests:
+              - not_null
+          - name: BudgetedCost
+            description: Amount of money budgeted for the campaign.
+          - name: CampaignImageId
+            description: ID of the campaign image. Available in API version 42.0 and later.
+          - name: CampaignMemberRecordTypeId
+            description: The record type ID for CampaignMember records associated with the campaign.
+          - name: CurrencyIsoCode
+            description: Available only for organizations with the multicurrency feature enabled. Contains the ISO code for any currency allowed by the organization.
+          - name: Description
+            description: Description of the campaign. Limit 32 KB. Only the first 255 characters display in reports.
+          - name: EndDate
+            description: Ending date for the campaign. Responses received after this date are still counted.
+          - name: ExpectedResponse
+            description: Percentage of responses you expect to receive for the campaign.
+          - name: ExpectedRevenue
+            description: Amount of money you expect to generate from the campaign.
+          - name: HierarchyActualCost
+            description: Calculated field for the total amount of money spent to run the campaigns in a campaign hierarchy. Label is Total Actual Cost in Hierarchy.
+          - name: HierarchyBudgetedCost
+            description: Calculated field for the total amount of money budgeted for the campaigns in a campaign hierarchy. Label isTotal Budgeted Cost in Hierarchy.
+          - name: HierarchyExpectedRevenue
+            description: Calculated field for the total amount of money you expect to generate from the campaigns in a campaign hierarchy. Label is Total Expected Revenue in Hierarchy.
+          - name: HierarchyNumberSent
+            description: Calculated field for the total number of individuals targeted by the campaigns in a campaign hierarchy. For example, the number of email messagess sent. Label is Total Num Sent in Hierarchy.
+          - name: IsActive
+            description: Indicates whether this campaign is active (true) or not (false). Default value is false. Label is Active.
+            tests:
+              - not_null
+          - name: LastActivityDate
+            description: Value is one of the following, whichever is the most recent - Due date of the most recent event logged against the record, Due date of the most recently closed task associated with the record.
+          - name: LastReferencedDate
+            description: The timestamp when the current user last accessed this record, a record related to this record, or a list view.
+          - name: LastViewedDate
+            description: The timestamp when the current user last viewed this record or list view. If this value is null, the user might have only accessed this record or list view (LastReferencedDate) but not viewed it.
+          - name: Name
+            description: Required. Name of the campaign. Limit is 80 characters.
+            tests:
+              - not_null
+          - name: NumberOfContacts
+            description: Number of contacts associated with the campaign. Label is Total Contacts.
+            tests:
+              - not_null
+          - name: NumberOfConvertedLeads
+            description: Number of leads that were converted to an account and contact due to the marketing efforts in the campaign. Label is Converted Leads.
+            tests:
+              - not_null
+          - name: NumberOfLeads
+            description: Number of leads associated with the campaign. Label is Leads in Campaign.
+            tests:
+              - not_null
+          - name: NumberOfOpportunities
+            description: Number of opportunities associated with the campaign. Label is Opportunities in Campaign.
+            tests:
+              - not_null
+          - name: NumberOfResponses
+            description: Number of contacts and unconverted leads with a Member Status equivalent to “Responded” for the campaign. Label is Responses in Campaign.
+            tests:
+              - not_null
+          - name: NumberOfWonOpportunities
+            description: Number of closed or won opportunities associated with the campaign. Label is Won Opportunities in Campaign.
+            tests:
+              - not_null
+          - name: NumberSent
+            description: Number of individuals targeted by the campaign. For example, the number of emails sent. Label is Num Sent.
+          - name: OwnerId
+            description: ID of the user who owns this campaign. Default value is the user logging in to the API to perform the create.
+            tests:
+              - not_null
+          - name: ParentCampaign
+            description: The campaign above the selected campaign in the campaign hierarchy.
+          - name: ParentId
+            description: ID of the parent campaign.
+          - name: RecordTypeId
+            description: ID of the record type assigned to this object.
+          - name: StartDate
+            description: Starting date for the campaign.
+          - name: Status
+            description: Status of the campaign, for example, Planned, In Progress. Limit 40 characters.
+          - name: TenantId
+            description: ID of the associated Pardot business unit. Read-only. Available in API verson 51.0 and later.
+          - name: TotalAmountAllOpportunities
+            description: Calculated field for total amount of all opportunities associated with the campaign hierarchy, including closed/won opportunities. Label is Total Value Opportunities in Hierarchy.
+          - name: TotalAmountAllWonOpportunities
+            description: Calculated field for amount of all closed/won opportunities associated with the campaign hierarchy. Label is Total Value Won Opportunities in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofContacts
+            description: Calculated field for number of contacts associated with the campaign hierarchy. Label is Total Contacts in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofConvertedLeads
+            description: Calculated field for the total number of leads associated with the campaign hierarchy that were converted into accounts, contacts, and opportunities. Label is Total Converted Leads in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofLeads
+            description: Calculated field for total number of leads associated with the campaign hierarchy. This number also includes converted leads. Label is Total Leads in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofOpportunities
+            description: Calculated field for the total number of opportunities associated with the campaign hierarchy. Label is Total Opportunities in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofResponses
+            description: Calculated field for number of contacts and unconverted leads that have a Member Status equivalent to “Responded” for the campaign hierarchy. Label is Total Responses in Hierarchy.
+            tests:
+              - not_null
+          - name: TotalNumberofWonOpportunities
+            description: Calculated field for the total number of won opportunities associated with the campaign hierarchy. Label is Total Won Opportunities in Hierarchy.
+            tests:
+              - not_null
+          - name: Type
+            description: Type of campaign, for example, Direct Mail or Referral Program. Limit 40 characters.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
+  
+      - name: asset
+        description: Represents an item of commercial value, such as a product sold by your company or a competitor, that a customer has purchased and installed.
+        columns:
+          - name: Id
+            description: Globally unique string that identifies a record. 
+            tests:
+              - unique
+              - not_null
+          - name: AccountId
+            description: (Required) ID of the Account associated with this asset. Must be a valid account ID. Required if ContactId isn’t specified.
+            tests:
+              - not_null
+          - name: AssetLevel
+            description: The asset’s position in an asset hierarchy. If the asset has no parent or child assets, its level is 1. Assets that belong to a hierarchy have a level of 1 for the root asset, 2 for the child assets of the root asset, 3 for their children, and so forth.
+          - name: AssetProvidedById
+            description: The account that provided the asset, typically a manufacturer.
+          - name: AssetServicedById
+            description: The account in charge of servicing the asset.
+          - name: Availability
+            description: The percentage of expected uptime where the asset was available for use.
+          - name: AverageUptimePerDay
+            description: The average number of hours per day the asset is expected to be available for use.
+          - name: ContactId
+            description: Required if AccountId isn’t specified. ID of the Contact associated with this asset. Must be a valid contact ID that has an account parent (but doesn’t need to match the asset’s AccountId).
+          - name: Description
+            description: Description of the asset.
+          - name: DigitalAssetStatus
+            description: Status of digital tracking of the asset. The default picklist includes the following values - On, Off, Warning, Error
+          - name: ExternalIdentifier
+            description: The ID of the matching record in an external system. This field is available from API version 49.0 and later.
+          - name: InstallDate
+            description: Date when the asset was installed.
+          - name: IsCompetitorProduct
+            description: Indicates whether this Asset represents a product sold by a competitor (true) or not (false). Default value is false. Its UI label is Competitor Asset.
+            tests:
+              - not_null
+          - name: IsInternal
+            description: Indicates that the asset is produced or used internally (true) or not (false). Default value is false. Its UI label is Internal Asset.
+            tests:
+              - not_null
+          - name: LastReferencedDate
+            description: The date and time that the asset was last modified. Its UI label is Last Modified Date.
+          - name: LastViewedDate
+            description: The date and time that the asset was last viewed.
+          - name: LocationId
+            description: The asset’s location. Typically, this location is the place where the asset is stored, such as a warehouse or van.
+          - name: ManufactureDate
+            description: The date when the asset was manufactured. This field is available from API version 49.0 and later.
+          - name: Name
+            description: (Required) Name of the asset. Label is Asset Name.
+            tests:
+              - not_null
+          - name: OwnerId
+            description: The asset’s owner. By default, the asset owner is the user who created the asset record. Its UI label is Asset Owner.
+            tests:
+              - not_null
+          - name: ParentId
+            description: The asset’s parent asset. Its UI label is Parent Asset.
+          - name: Price
+            description: Price paid for this asset.
+          - name: Product2Id
+            description: (Optional) ID of the Product2 associated with this asset. Must be a valid Product2 ID. Its UI label is Product.
+          - name: ProductCode
+            description: The product code of the related product.
+          - name: ProductDescription
+            description: The product description of the related product.
+          - name: ProductFamily
+            description: The product family of the related product.
+          - name: PurchaseDate
+            description: Date on which this asset was purchased.
+          - name: Quantity
+            description: Quantity purchased or installed.
+          - name: Reliability
+            description: The percentage of expected uptime where the asset wasn’t subject to unplanned downtime.
+          - name: RootAssetId
+            description: (Read only) The top-level asset in an asset hierarchy. Depending on where an asset lies in the hierarchy, its root could be the same as its parent. Its UI label is Root Asset.
+          - name: SerialNumber
+            description: Serial number for this asset.
+          - name: Status
+            description: Customizable picklist of values. The default picklist includes the following values - Purchased, Shipped, Installed, Registered, Obsolete
+          - name: StatusReason
+            description: The explanation of the device status. This field is available from API version 49.0 and later.
+          - name: StockKeepingUnit
+            description: The SKU assigned to the related product.
+          - name: SumDowntime
+            description: Accumulated downtime (planned and unplanned).
+          - name: SumUnplannedDowntime
+            description: Accumulated unplanned downtime.
+          - name: TotalLifecycleAmount
+            description: The total amount of revenue for the asset, including revenue from each stage in the asset lifecycle.
+          - name: UptimeRecordEnd
+            description: The date that SumDowntime and SumUnplannedDowntime are accumulated until.
+          - name: UptimeRecordStart
+            description: The date from which SumDowntime and SumUnplannedDowntime are accumulated.
+          - name: UsageEndDate
+            description: Date when usage for this asset ends or expires.
+          - name: Uuid
+            description: The unique ID for the asset. This field is available from API version 49.0 and later.
+          - name: CreatedById
+            description: ID of the User who created this record. 
+            tests:
+              - not_null
+          - name: CreatedDate
+            description: Date and time when this record was created.
+            tests:
+              - not_null
+          - name: LastModifiedById
+            description: ID of the User who last updated this record.
+            tests:
+              - not_null
+          - name: LastModifiedDate
+            description: Date and time when a user last modified this record.
+            tests:
+              - not_null
+          - name: SystemModstamp
+            description: Date and time when a user or automated process (such as a trigger) last modified this record. In this context, trigger refers to Salesforce code that runs to implement standard functionality, and not an Apex trigger. 
+            tests:
+              - not_null
